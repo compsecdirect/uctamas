@@ -4,6 +4,7 @@ https://github.com/compsecdirect/uctamas/
 
 Docker / container realted info
 
+https://github.com/getCUJO/ThreatIntel/tree/master/Scripts/Ghidra
 https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-docker/configure-docker-daemon
 https://github.com/containerd/containerd/blob/main/docs/getting-started.md#installing-containerd-on-windows
 https://social.technet.microsoft.com/wiki/contents/articles/38652.nano-server-getting-started-in-container-with-docker.aspx
