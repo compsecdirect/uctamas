@@ -1,0 +1,70 @@
+*Container tools & commands*
+c:\tools <- volume outside of container, mounted into container. Called tools in volumes
+
+
+*docker*
+docker pull mcr.microsoft.com/windows/servercore:ltsc2022
+
+
+--create volume-
+docker volume create tools-volume
+
+--create container from image with volume
+docker create -t --name CoreTest -h CoreTest --mount source=tools-volume,target=c:\tools -i mcr.microsoft.com/windows/servercore:ltsc2022
+
+--docker images-
+docker container ls
+docker volume ls
+docker ps -a
+docker inspect ID or NAME
+
+--run single command-
+docker run mcr.microsoft.com/windows/servercore:ltsc2022
+
+---detach from running container
+Press Ctrl-P, followed by Ctrl-Q???
+
+--move new tools into container--
+docker cp C:\Users\Administrator\Downloads\capa-v4.0.1-windows.zip NAME:c:\
+docker cp C:\Users\Administrator\Downloads\7z2201-extra.7z NAME:c:\
+??exec in, move into volume??
+
+run interactive
+docker exec -i cmd.exe ID or NAME
+
+stop container
+docker stop ID or NAME
+
+save container changes to new image
+docker commit 80a0a3b54672 avengerconvii/servercore:11nov22
+
+export container
+docker save avengerconvii/servercore:11nov22 -o 11nov22.tar
+
+Workflow steps:
+
+1) pull samples
+$postParams = @{query='get_file';sha256_hash='094fd325049b8a9cf6d3e5ef2a6d4cc6a567d7d49c35f8bb8dd9e3c6acf3d78d'}
+
+Invoke-WebRequest -Uri https://mb-api.abuse.ch/api/v1/ -Method POST -Body $postParams -UseBasicParsing -outfile c:\samples\094fd325049b8a9cf6d3e5ef2a6d4cc6a567d7d49c35f8bb8dd9e3c6acf3d78d.zip
+
+2) decompress
+*7z*
+./7za x -pinfected ..\samples\094fd325049b8a9cf6d3e5ef2a6d4cc6a567d7d49c35f8bb8dd9e3c6acf3d78d.zip
+
+3) run tool or tools
+*capa*
+./capa.exe ..\samples\094fd325049b8a9cf6d3e5ef2a6d4cc6a567d7d49c35f8bb8dd9e3c6acf3d78d.exe
+
+4) add tor
+docker pull alpine:latest
+pull files from https://github.com/tarhan/tor-alpine-docker
+docker build . -t tarhan/tor
+
+5) add mitm proxy
+docker pull mitmproxy/mitmproxy:latest
+docker run --rm -it [-v ~/.mitmproxy:/home/mitmproxy/.mitmproxy] -p 8080:8080 mitmproxy/mitmproxy
+
+6) save output to volume
+
+7) ingest into searchable
