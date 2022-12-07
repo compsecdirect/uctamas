@@ -1,4 +1,5 @@
 #!/bin/bash
+# subsitute 386 with your file of choice
 MPID=$(pgrep /home/debian/386)
 cat /proc/"$MPID"/maps > memmaps.txt
 python gdb.execute("attach " + os.popen('pgrep /home/debian/386').read().rstrip())
