@@ -1,33 +1,34 @@
 *Container tools & commands*
+We will create a windows volume and mount it using a non-existent folder.
 c:\tools <- volume outside of container, mounted into container. Called tools in volumes
-
 
 *docker*
 docker pull mcr.microsoft.com/windows/servercore:ltsc2022
 
-
 --create volume-
+Volumes help store data out of containers. This helps store data in more permanet locations until the volume is removed.
 docker volume create tools-volume
 
 --create container from image with volume
+Creating a container with create makes the data inside the container permanent until the container is removed.
 docker create -t --name CoreTest -h CoreTest --mount source=tools-volume,target=c:\tools -i mcr.microsoft.com/windows/servercore:ltsc2022
 
---docker images-
+--docker commands-
 docker container ls
 docker volume ls
 docker ps -a
 docker inspect ID or NAME
 
 --run single command-
+Running a container with run is ephemeral and non-permanent.
 docker run mcr.microsoft.com/windows/servercore:ltsc2022
 
 ---detach from running container
 Press Ctrl-P, followed by Ctrl-Q???
 
 --move new tools into container--
-docker cp C:\Users\Administrator\Downloads\capa-v4.0.1-windows.zip NAME:c:\
-docker cp C:\Users\Administrator\Downloads\7z2201-extra.7z NAME:c:\
-??exec in, move into volume??
+docker cp C:\Users\Administrator\Downloads\capa-v4.0.1-windows.zip VOLUMENAME:c:\tools
+docker cp C:\Users\Administrator\Downloads\7z2201-extra.7z VOLUMENAME:c:\tools
 
 run interactive
 docker exec -i cmd.exe ID or NAME
@@ -36,23 +37,23 @@ stop container
 docker stop ID or NAME
 
 save container changes to new image
-docker commit 80a0a3b54672 avengerconvii/servercore:11nov22
+docker commit 80a0a3b54672 REPO/servercore:11nov22
 
 export container
-docker save avengerconvii/servercore:11nov22 -o 11nov22.tar
+docker save REPO/servercore:11nov22 -o 11nov22.tar
 
 Workflow steps:
 
-1) pull samples
+1) pull samples by using powershell to make a post request
 $postParams = @{query='get_file';sha256_hash='094fd325049b8a9cf6d3e5ef2a6d4cc6a567d7d49c35f8bb8dd9e3c6acf3d78d'}
 
 Invoke-WebRequest -Uri https://mb-api.abuse.ch/api/v1/ -Method POST -Body $postParams -UseBasicParsing -outfile c:\samples\094fd325049b8a9cf6d3e5ef2a6d4cc6a567d7d49c35f8bb8dd9e3c6acf3d78d.zip
 
-2) decompress
+2) decompress, powershell cannot extract 7z files with passwords due to missing compression algorithm
 *7z*
 ./7za x -pinfected ..\samples\094fd325049b8a9cf6d3e5ef2a6d4cc6a567d7d49c35f8bb8dd9e3c6acf3d78d.zip
 
-3) run tool or tools
+3) run tool or tools, your local Windows AV will prevent some samples, send only your strongest warriors that bypass defenses!
 *capa*
 ./capa.exe ..\samples\094fd325049b8a9cf6d3e5ef2a6d4cc6a567d7d49c35f8bb8dd9e3c6acf3d78d.exe
 
