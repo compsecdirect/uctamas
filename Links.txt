@@ -4,16 +4,20 @@ https://github.com/compsecdirect/uctamas/
 
 Docker / container realted info
 
-https://github.com/getCUJO/ThreatIntel/tree/master/Scripts/Ghidra
+Windows Containers
 https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-docker/configure-docker-daemon
 https://github.com/containerd/containerd/blob/main/docs/getting-started.md#installing-containerd-on-windows
 https://social.technet.microsoft.com/wiki/contents/articles/38652.nano-server-getting-started-in-container-with-docker.aspx
+https://sarcasticcoder.com/docker/mounting-folders-to-a-windows-docker-container-from-a-windows-host/
+
+Docker
 https://docs.docker.com/storage/volumes/
 https://www.howtogeek.com/devops/how-to-add-a-volume-to-an-existing-docker-container/
-https://sarcasticcoder.com/docker/mounting-folders-to-a-windows-docker-container-from-a-windows-host/
 https://docs.docker.com/network/bridge/
 
 Tools and containers
-
 https://github.com/tarhan/tor-alpine-docker
 https://github.com/mandiant/capa/releases
+
+Advanced tools and workshop parts
+https://github.com/getCUJO/ThreatIntel/tree/master/Scripts/Ghidra
