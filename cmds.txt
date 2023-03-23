@@ -4,8 +4,8 @@
 
 --Common commands-
 
-docker container ls
-docker volume ls
+docker container ls -a
+docker volume ls -a
 docker ps -a
 docker inspect ID or NAME <- ID is random number while NAME is defined
 docker info < - Get OS config related to docker deployment
@@ -34,10 +34,22 @@ docker run -dit --mount source=myvolume,target=/myvolume alpine:latest
 
 Task 4. Add files / tools to containers and volumes
 
-docker run -dit --name yarGen -v tools:/tools python:3.7.15-alpine3.17
-docker cp yarGen-master.zip yarGen:/opt/
+docker volume create tools
+docker volume create samples
+docker run -dit --name yarGen -v tools:/tools -v samples:/samples python:3.7.15-alpine3.17
 docker cp yarGen-master.zip yarGen:/tools
+docker cp yarGen-master.zip yarGen:/opt/
 docker exec -it yarGen sh
+or
+docker exec -it unzip /tools/yarGen-Master.zip
+docker exec -it python3 /tools/yarGen-Master/yarGen.py --update
+docker exec -it yarGen sh
+
+python3 yarGen.py --update
+
+Bonus: docker exec -it yarGen python3 /tools/yarGen-Master/yarGen.py
+
+Task 4. Add files / tools to containers and volumes
 
 
 # Workshop 3 - Containers on Windows
