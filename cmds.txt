@@ -89,6 +89,9 @@ docker exec -it yarGenNonroot whoami <- non-root
 
 **Now we have a limited user account that cannot benefit from root privileges inside containe while still running tools**
 
+# Workshop 2 - Scripted Malware analysis
+
+
 # Workshop 3 - Containers on Windows
 *Container tools & commands*
 We will create a windows volume and mount it using a non-existent folder.
