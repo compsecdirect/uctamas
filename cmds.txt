@@ -64,6 +64,27 @@ docker save mylocalyargen:mar252023 -o myexport.tar  < - you can share tar with 
 docker rmi mylocalyargen:mar252023 < - remove the locarepo and tag we commited earlier
 docker load -i myexport.tar <- Image has now been remade
 
+Task 7. Base container with samples
+
+
+Task 8. Non-root user
+*alpine base container*
+cat <<EOF>> Dockerfile
+FROM mylocalyargen:mar252023
+RUN addgroup -S user && adduser -S non-root -G user
+user non-root
+EOF
+
+docker build -t mylocalyargen:nonrootmar252023 .
+docker run -dit --name yarGenNonroot -v tools:/tools -v samples:/samples mylocalyargen:nonrootmar252023 --user root <-need to fix file permissions
+docker exec -it yarGenNonroot chown -R non-root:user /tools /samples
+docker exec -it yarGenNonroot sh <- We are still root!!
+docker stop yarGenNonroot
+docker rm yarGenNonroot
+docker run -dit --name yarGenNonroot -v tools:/tools -v samples:/samples mylocalyargen:nonrootmar252023
+docker exec -it yarGenNonroot whoami <- non-root
+
+
 # Workshop 3 - Containers on Windows
 *Container tools & commands*
 We will create a windows volume and mount it using a non-existent folder.
