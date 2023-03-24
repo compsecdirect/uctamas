@@ -6,10 +6,14 @@
 
 docker container ls -a
 docker volume ls -a
-docker ps -a
+docker ps <- Only shows running
+docker ps -a <- Shows stopped and running containers
+docker stop ID or NAME
 docker inspect ID or NAME <- ID is random number while NAME is defined
 docker info < - Get OS config related to docker deployment
-
+docker run  <- Create and run a new container from an image
+docker create < - Creates a new container from the specified image, without starting it.
+docker exec < - Run command on running container
 
 Task 1. Range check - Ensure you can login to the range.
 
@@ -25,18 +29,7 @@ docker run -dit --name myalpine python:3.7.15-alpine3.17
 docker stop myalpine
 docker start myalpine
 
-Task 2. 
-
-
-docker ps <- Only shows running
-docker ps -a <- Shows stopped and running containers
-docker stop ID or NAME
-
-docker run  <- Create and run a new container from an image
-docker create < - Creates a new container from the specified image, without starting it.
-docker exec < - Run command on running container
-
-Task 3. Mounts and volumes
+Task 4. Mounts and volumes
 
 docker run -dit --mount type=bind,source=/etc/shadow,target=/myShadow alpine:latest
 docker run -dit -v /etc/shadow:/myShadow alpine:latest
@@ -45,7 +38,7 @@ docker volume create myvolume
 docker run -dit -v myvolume:/myvolume alpine:latest
 docker run -dit --mount source=myvolume,target=/myvolume alpine:latest
 
-Task 4. Add files / tools to containers and volumes
+Task 5. Add files / tools to containers and volumes
 
 docker volume create tools
 docker volume create samples
@@ -53,7 +46,9 @@ docker run -dit --name yarGen -v tools:/tools -v samples:/samples python:3.7.15-
 docker cp yarGen-master.zip yarGen:/tools
 docker cp yarGen-master.zip yarGen:/opt/
 docker exec -it yarGen sh
+
 or
+
 docker exec -it unzip /tools/yarGen-Master.zip
 docker exec -it python3 /tools/yarGen-Master/yarGen.py --update
 docker exec -it yarGen sh
@@ -63,10 +58,11 @@ python3 yarGen.py --update
 Bonus: docker exec -it yarGen python3 /tools/yarGen-Master/yarGen.py
 Question: why is this inefficient?
 
-Task 5. Commit / Save
+Task 6. Commit / Save
 docker commit -m "Some changes on this day" yarGen mylocalyargen:mar252023 < - pauses running containers creates new image
-docker save mylocalyargen:mar252023 -o myexport.tar
-
+docker save mylocalyargen:mar252023 -o myexport.tar  < - you can share tar with someone else
+docker rmi mylocalyargen:mar252023 < - remove the locarepo and tag we commited earlier
+docker load -i myexport.tar <- Image has now been remade
 
 # Workshop 3 - Containers on Windows
 *Container tools & commands*
