@@ -53,21 +53,24 @@ docker exec -it unzip /tools/yarGen-Master.zip
 docker exec -it python3 /tools/yarGen-Master/yarGen.py --update
 docker exec -it yarGen sh
 
+or
+
+docker info < - Look at Docker Root Dir "/var/lib/docker"
+cp YourTools /var/lib/docker/volumes/tools/_data/  < - Easier this way and still valid way when storage driver is default overlay2
+
+
 python3 yarGen.py --update
 
 Bonus: docker exec -it yarGen python3 /tools/yarGen-Master/yarGen.py
 Question: why is this inefficient?
 
-Task 6. Commit / Save
+Task 6. Commit / save base container with samples and tool volumes
 docker commit -m "Some changes on this day" yarGen mylocalyargen:mar252023 < - pauses running containers creates new image
 docker save mylocalyargen:mar252023 -o myexport.tar  < - you can share tar with someone else
 docker rmi mylocalyargen:mar252023 < - remove the locarepo and tag we commited earlier
 docker load -i myexport.tar <- Image has now been remade
 
-Task 7. Base container with samples
-
-
-Task 8. Non-root user
+Task 7. Non-root user
 *alpine base container*
 cat <<EOF>> Dockerfile
 FROM mylocalyargen:mar252023
@@ -76,7 +79,7 @@ user non-root
 EOF
 
 docker build -t mylocalyargen:nonrootmar252023 .
-docker run -dit --name yarGenNonroot -v tools:/tools -v samples:/samples mylocalyargen:nonrootmar252023 --user root <-need to fix file permissions
+docker run -dit --name yarGenNonroot -v tools:/tools -v samples:/samples --user root mylocalyargen:nonrootmar252023 <-need to fix file permissions
 docker exec -it yarGenNonroot chown -R non-root:user /tools /samples
 docker exec -it yarGenNonroot sh <- We are still root!!
 docker stop yarGenNonroot
@@ -84,6 +87,7 @@ docker rm yarGenNonroot
 docker run -dit --name yarGenNonroot -v tools:/tools -v samples:/samples mylocalyargen:nonrootmar252023
 docker exec -it yarGenNonroot whoami <- non-root
 
+**Now we have a limited user account that cannot benefit from root privileges inside containe while still running tools**
 
 # Workshop 3 - Containers on Windows
 *Container tools & commands*
