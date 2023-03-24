@@ -1,3 +1,95 @@
+# UCTAMAS
+
+# Workshop 1 - Docker refresh
+
+--Common commands-
+
+docker container ls -a
+docker volume ls -a
+docker ps <- Only shows running
+docker ps -a <- Shows stopped and running containers
+docker stop ID or NAME
+docker inspect ID or NAME <- ID is random number while NAME is defined
+docker info < - Get OS config related to docker deployment
+docker run  <- Create and run a new container from an image
+docker create < - Creates a new container from the specified image, without starting it.
+docker exec < - Run command on running container
+
+Task 1. Range check - Ensure you can login to the range.
+
+Task 2. Malware-daily.py usage
+
+python3 malware-daily.py -p myfolder <- Pulls previous dates samples from Malware Bazaar
+python3 malware-daily.py -q myHashValue <- Queries Malware Bazaar for a given md5/sha1/sha256/ value
+
+Task 3. Pull images / run / start and stop containers
+
+docker pull python:3.7.15-alpine3.17
+docker run -dit --name myalpine python:3.7.15-alpine3.17
+docker stop myalpine
+docker start myalpine
+
+Task 4. Mounts and volumes
+
+docker run -dit --mount type=bind,source=/etc/shadow,target=/myShadow alpine:latest
+docker run -dit -v /etc/shadow:/myShadow alpine:latest
+
+docker volume create myvolume
+docker run -dit -v myvolume:/myvolume alpine:latest
+docker run -dit --mount source=myvolume,target=/myvolume alpine:latest
+
+Task 5. Add files / tools to containers and volumes
+
+docker volume create tools
+docker volume create samples
+docker run -dit --name yarGen -v tools:/tools -v samples:/samples python:3.7.15-alpine3.17
+docker cp yarGen-master.zip yarGen:/tools
+docker cp yarGen-master.zip yarGen:/opt/
+docker exec -it yarGen sh
+
+or
+
+docker exec -it unzip /tools/yarGen-Master.zip
+docker exec -it python3 /tools/yarGen-Master/yarGen.py --update
+docker exec -it yarGen sh
+
+or
+
+docker info < - Look at Docker Root Dir "/var/lib/docker"
+cp YourTools /var/lib/docker/volumes/tools/_data/  < - Easier this way and still valid way when storage driver is default overlay2
+
+
+python3 yarGen.py --update
+
+Bonus: docker exec -it yarGen python3 /tools/yarGen-Master/yarGen.py
+Question: why is this inefficient?
+
+Task 6. Commit / save base container with samples and tool volumes
+docker commit -m "Some changes on this day" yarGen mylocalyargen:mar252023 < - pauses running containers creates new image
+docker save mylocalyargen:mar252023 -o myexport.tar  < - you can share tar with someone else
+docker rmi mylocalyargen:mar252023 < - remove the locarepo and tag we commited earlier
+docker load -i myexport.tar <- Image has now been remade
+
+Task 7. Non-root user
+*alpine base container*
+cat <<EOF>> Dockerfile
+FROM mylocalyargen:mar252023
+RUN addgroup -S user && adduser -S non-root -G user
+user non-root
+EOF
+
+docker build -t mylocalyargen:nonrootmar252023 .
+docker run -dit --name yarGenNonroot -v tools:/tools -v samples:/samples --user root mylocalyargen:nonrootmar252023 <-need to fix file permissions
+docker exec -it yarGenNonroot chown -R non-root:user /tools /samples
+docker exec -it yarGenNonroot sh <- We are still root!!
+docker stop yarGenNonroot
+docker rm yarGenNonroot
+docker run -dit --name yarGenNonroot -v tools:/tools -v samples:/samples mylocalyargen:nonrootmar252023
+docker exec -it yarGenNonroot whoami <- non-root
+
+**Now we have a limited user account that cannot benefit from root privileges inside containe while still running tools**
+
+# Workshop 3 - Containers on Windows
 *Container tools & commands*
 We will create a windows volume and mount it using a non-existent folder.
 c:\tools <- volume outside of container, mounted into container. Called tools in volumes
@@ -12,12 +104,6 @@ docker volume create tools-volume
 --create container from image with volume
 Creating a container with create makes the data inside the container permanent until the container is removed.
 docker create -t --name CoreTest -h CoreTest --mount source=tools-volume,target=c:\tools -i mcr.microsoft.com/windows/servercore:ltsc2022
-
---docker commands-
-docker container ls
-docker volume ls
-docker ps -a
-docker inspect ID or NAME
 
 --run single command-
 Running a container with run is ephemeral and non-permanent.
