@@ -19,5 +19,7 @@ Tools and containers
 https://github.com/tarhan/tor-alpine-docker
 https://github.com/mandiant/capa/releases
 
-Advanced tools and workshop parts
+Advanced tools, concepts and workshop parts
+https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-2/
 https://github.com/getCUJO/ThreatIntel/tree/master/Scripts/Ghidra
+
