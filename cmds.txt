@@ -13,7 +13,20 @@ docker info < - Get OS config related to docker deployment
 
 Task 1. Range check - Ensure you can login to the range.
 
-Task 2. Start and stop containers
+Task 2. Malware-daily.py usage
+
+python3 malware-daily.py -p myfolder <- Pulls previous dates samples from Malware Bazaar
+python3 malware-daily.py -q myHashValue <- Queries Malware Bazaar for a given md5/sha1/sha256/ value
+
+Task 3. Pull images / run / start and stop containers
+
+docker pull python:3.7.15-alpine3.17
+docker run -dit --name myalpine python:3.7.15-alpine3.17
+docker stop myalpine
+docker start myalpine
+
+Task 2. 
+
 
 docker ps <- Only shows running
 docker ps -a <- Shows stopped and running containers
@@ -48,8 +61,11 @@ docker exec -it yarGen sh
 python3 yarGen.py --update
 
 Bonus: docker exec -it yarGen python3 /tools/yarGen-Master/yarGen.py
+Question: why is this inefficient?
 
-Task 4. Add files / tools to containers and volumes
+Task 5. Commit / Save
+docker commit -m "Some changes on this day" yarGen mylocalyargen:mar252023 < - pauses running containers creates new image
+docker save mylocalyargen:mar252023 -o myexport.tar
 
 
 # Workshop 3 - Containers on Windows
