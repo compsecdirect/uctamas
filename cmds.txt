@@ -133,6 +133,11 @@ https://github.com/mandiant/capa/releases/download/v5.0.0/capa-v5.0.0-windows.zi
 Invoke-WebRequest -Uri https://github.com/mandiant/capa/releases/download/v5.0.0/capa-v5.0.0-windows.zip -Method GET -UseBasicParsing -outfile c:
 \tools\capa-v5.0.0-windows.zip
 
+https://7-zip.org/a/7z2201-extra.7z
+Invoke-WebRequest -Uri https://7-zip.org/a/7z2201-extra.7z -Method GET -UseBasicParsing -outfile c:\tools\7z2201-extra.7z
+
+.\7zr.exe e .\7z2201-extra.7z
+
 Expand-Archive -LiteralPath .\capa-v5.0.0-windows.zip -DestinationPath .
 
 run interactive
@@ -156,11 +161,11 @@ Invoke-WebRequest -Uri https://mb-api.abuse.ch/api/v1/ -Method POST -Body $postP
 
 2) decompress, powershell cannot extract 7z files with passwords due to missing compression algorithm
 *7z*
-./7za x -pinfected ..\samples\094fd325049b8a9cf6d3e5ef2a6d4cc6a567d7d49c35f8bb8dd9e3c6acf3d78d.zip
+c:\tools\7za x -pinfected c:\samples\094fd325049b8a9cf6d3e5ef2a6d4cc6a567d7d49c35f8bb8dd9e3c6acf3d78d.zip
 
 3) run tool or tools, your local Windows AV will prevent some samples, send only your strongest warriors that bypass defenses!
 *capa*
-./capa.exe ..\samples\094fd325049b8a9cf6d3e5ef2a6d4cc6a567d7d49c35f8bb8dd9e3c6acf3d78d.exe
+./capa.exe c:\samples\094fd325049b8a9cf6d3e5ef2a6d4cc6a567d7d49c35f8bb8dd9e3c6acf3d78d.exe
 
 4) add tor
 docker pull alpine:latest
