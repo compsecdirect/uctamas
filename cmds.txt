@@ -91,6 +91,13 @@ docker exec -it yarGenNonroot whoami <- non-root
 
 # Workshop 2 - Scripted Malware analysis
 
+cd ~/RANSOMWARE-Caution/ech0raix
+follow Docker-instructions.txt to launch container
+use output for special scripted tools to help automate analysis
+Use cleam-all.sh to remove older material < - Since sample is older, some artifcats wont be possible to recover
+Use tmux-launch.sh to quikcly automate some analysis tools <- Since this is looped we need to control execution time
+docker run --rm -it -v /home/kali/RANSOMWARE-Caution/ech0raix:/home/debian -w /home/debian/output ech0raix/jan302022am timeout 30s /home/debian/output/tmux-launch.sh
+
 
 # Workshop 3 - Containers on Windows
 *Container tools & commands*
