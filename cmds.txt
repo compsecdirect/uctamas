@@ -123,8 +123,17 @@ docker run mcr.microsoft.com/windows/servercore:ltsc2022
 Press Ctrl-P, followed by Ctrl-Q???
 
 --move new tools into container--
-docker cp C:\Users\Administrator\Downloads\capa-v4.0.1-windows.zip VOLUMENAME:c:\tools
+docker cp C:\Users\Administrator\Downloads\capa-v4.0.1-windows.zip VOLUMENAME:c:\tools < Fails due to Adminstrator Path
 docker cp C:\Users\Administrator\Downloads\7z2201-extra.7z VOLUMENAME:c:\tools
+
+https://7-zip.org/a/7zr.exe
+Invoke-WebRequest -Uri https://7-zip.org/a/7zr.exe -Method GET -UseBasicParsing -outfile c:\tools\7zr.exe
+
+https://github.com/mandiant/capa/releases/download/v5.0.0/capa-v5.0.0-windows.zip
+Invoke-WebRequest -Uri https://github.com/mandiant/capa/releases/download/v5.0.0/capa-v5.0.0-windows.zip -Method GET -UseBasicParsing -outfile c:
+\tools\capa-v5.0.0-windows.zip
+
+Expand-Archive -LiteralPath .\capa-v5.0.0-windows.zip -DestinationPath .
 
 run interactive
 docker exec -i cmd.exe ID or NAME
