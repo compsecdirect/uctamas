@@ -148,8 +148,8 @@ Invoke-WebRequest -Uri https://mb-api.abuse.ch/api/v1/ -Method POST -Body $postP
 
 4) add tor
 docker pull alpine:latest
-pull files from https://github.com/tarhan/tor-alpine-docker
-docker build . -t tarhan/tor
+pull files from https://github.com/klemmchr/tor-alpine
+run tor-alpine.sh
 
 5) add mitm proxy
 docker pull mitmproxy/mitmproxy:latest
