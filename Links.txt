@@ -9,6 +9,7 @@ https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-docker
 https://github.com/containerd/containerd/blob/main/docs/getting-started.md#installing-containerd-on-windows
 https://social.technet.microsoft.com/wiki/contents/articles/38652.nano-server-getting-started-in-container-with-docker.aspx
 https://sarcasticcoder.com/docker/mounting-folders-to-a-windows-docker-container-from-a-windows-host/
+https://techcommunity.microsoft.com/t5/itops-talk-blog/how-to-change-the-user-account-for-windows-containers/ba-p/3601571
 
 Docker
 https://docs.docker.com/storage/volumes/
