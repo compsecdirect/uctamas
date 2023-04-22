@@ -10,6 +10,8 @@ https://github.com/containerd/containerd/blob/main/docs/getting-started.md#insta
 https://social.technet.microsoft.com/wiki/contents/articles/38652.nano-server-getting-started-in-container-with-docker.aspx
 https://sarcasticcoder.com/docker/mounting-folders-to-a-windows-docker-container-from-a-windows-host/
 https://techcommunity.microsoft.com/t5/itops-talk-blog/how-to-change-the-user-account-for-windows-containers/ba-p/3601571
+https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/container-storage
+https://social.technet.microsoft.com/Forums/windowsserver/en-US/4d3b3961-a611-4191-bdd1-0e503b0b9438/set-folder-permissions-using-ps?forum=winserverpowershell
 
 Docker
 https://docs.docker.com/storage/volumes/
