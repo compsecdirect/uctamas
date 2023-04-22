@@ -89,17 +89,7 @@ docker exec -it yarGenNonroot whoami <- non-root
 
 **Now we have a limited user account that cannot benefit from root privileges inside containe while still running tools**
 
-# Workshop 2 - Scripted Malware analysis
-
-cd ~/RANSOMWARE-Caution/ech0raix
-follow Docker-instructions.txt to launch container
-use output for special scripted tools to help automate analysis
-Use cleam-all.sh to remove older material < - Since sample is older, some artifcats wont be possible to recover
-Use tmux-launch.sh to quikcly automate some analysis tools <- Since this is looped we need to control execution time
-docker run --rm -it -v /home/kali/RANSOMWARE-Caution/ech0raix:/home/debian -w /home/debian/output ech0raix/jan302022am timeout 30s /home/debian/output/tmux-launch.sh
-
-
-# Workshop 3 - Containers on Windows
+# Workshop 2 - Containers on Windows
 *Container tools & commands*
 We will create a windows volume and mount it using a non-existent folder.
 c:\tools <- volume outside of container, mounted into container. Called tools in volumes
@@ -151,6 +141,15 @@ docker commit 80a0a3b54672 REPO/servercore:11nov22
 
 export container
 docker save REPO/servercore:11nov22 -o 11nov22.tar
+
+# Workshop 3 - Scripted Malware analysis
+
+cd ~/RANSOMWARE-Caution/ech0raix
+follow Docker-instructions.txt to launch container
+use output for special scripted tools to help automate analysis
+Use cleam-all.sh to remove older material < - Since sample is older, some artifcats wont be possible to recover
+Use tmux-launch.sh to quikcly automate some analysis tools <- Since this is looped we need to control execution time
+docker run --rm -it -v /home/kali/RANSOMWARE-Caution/ech0raix:/home/debian -w /home/debian/output ech0raix/jan302022am timeout 30s /home/debian/output/tmux-launch.sh
 
 Workflow steps:
 
