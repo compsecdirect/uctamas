@@ -142,6 +142,9 @@ docker commit 80a0a3b54672 REPO/servercore:11nov22
 export container
 docker save REPO/servercore:11nov22 -o 11nov22.tar
 
+Expert mounted  
+docker run -dit --name python-non-admin -v scripts:c:\scripts -v samples:c:\samples -v workshop_tools:c:\tools -v output:c:\output -v python_311:c:\python\ uctamas:apr222023
+
 # Workshop 3 - Scripted Malware analysis
 
 cd ~/RANSOMWARE-Caution/ech0raix
