@@ -1,0 +1,5 @@
+FROM mcr.microsoft.com/windows/servercore:ltsc2022
+#RUN setx path "%path%;C:\python;C:\python\scripts"
+RUN setx path C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\python;C:\python\scripts
+RUN net user ContainerUser /add /y
+USER ContainerUser
