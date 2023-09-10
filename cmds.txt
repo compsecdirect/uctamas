@@ -116,33 +116,32 @@ Press Ctrl-P, followed by Ctrl-Q???
 docker cp C:\Users\Administrator\Downloads\capa-v4.0.1-windows.zip CONTAINERNAME:c:\tools < Fails due to Adminstrator Path
 docker cp C:\Users\Administrator\Downloads\7z2201-extra.7z CONTAINERNAME:c:\tools
 
-https://7-zip.org/a/7zr.exe
+--https://7-zip.org/a/7zr.exe
 Invoke-WebRequest -Uri https://7-zip.org/a/7zr.exe -Method GET -UseBasicParsing -outfile c:\tools\7zr.exe
 
-https://github.com/mandiant/capa/releases/download/v5.0.0/capa-v5.0.0-windows.zip
-Invoke-WebRequest -Uri https://github.com/mandiant/capa/releases/download/v5.0.0/capa-v5.0.0-windows.zip -Method GET -UseBasicParsing -outfile c:
-\tools\capa-v5.0.0-windows.zip
+--https://github.com/mandiant/capa/releases/download/v5.0.0/capa-v5.0.0-windows.zip
+Invoke-WebRequest -Uri https://github.com/mandiant/capa/releases/download/v5.0.0/capa-v5.0.0-windows.zip -Method GET -UseBasicParsing -outfile c:\tools\capa-v5.0.0-windows.zip
 
-https://7-zip.org/a/7z2201-extra.7z
+--https://7-zip.org/a/7z2201-extra.7z
 Invoke-WebRequest -Uri https://7-zip.org/a/7z2201-extra.7z -Method GET -UseBasicParsing -outfile c:\tools\7z2201-extra.7z
 
 .\7zr.exe e .\7z2201-extra.7z
 
 Expand-Archive -LiteralPath .\capa-v5.0.0-windows.zip -DestinationPath .
 
-run interactive
-docker exec -i cmd.exe ID or NAME
+--run interactive
+docker exec -i ID or NAME cmd.exe
 
-stop container
+--stop container
 docker stop ID or NAME
 
-save container changes to new image
+--save container changes to new image
 docker commit 80a0a3b54672 REPO/servercore:11nov22
 
-export container
+--export container
 docker save REPO/servercore:11nov22 -o 11nov22.tar
 
-Expert mounted  
+--Expert mounted  
 docker run -dit --name python-non-admin -v scripts:c:\scripts -v samples:c:\samples -v workshop_tools:c:\tools -v output:c:\output -v python_311:c:\python\ uctamas:apr222023
 
 # Workshop 3 - Scripted Malware analysis
