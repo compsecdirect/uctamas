@@ -1,0 +1,18 @@
+# Used in Windows containers workshop section
+# Run this vs manually doing each command
+# Since the malware bazaar zips are encrypted, we need 7z to help extract samples vs Expand-Archive
+
+# Get 7zr
+Invoke-WebRequest -Uri https://7-zip.org/a/7zr.exe -Method GET -UseBasicParsing -outfile c:\tools\7zr.exe
+
+# Get CAPA https://github.com/mandiant/capa/releases/download/v5.0.0/capa-v5.0.0-windows.zip
+Invoke-WebRequest -Uri https://github.com/mandiant/capa/releases/download/v5.0.0/capa-v5.0.0-windows.zip -Method GET -UseBasicParsing -outfile c:\tools\capa-v5.0.0-windows.zip
+
+# Get 7z-extras https://7-zip.org/a/7z2201-extra.7z
+Invoke-WebRequest -Uri https://7-zip.org/a/7z2201-extra.7z -Method GET -UseBasicParsing -outfile c:\tools\7z2201-extra.7z
+
+# Use 7zr to extract 7z-extras ; can you make this better?
+.\7zr.exe e .\7z2201-extra.7z
+
+# Use Expand-Archive to decompress CAPA
+Expand-Archive -LiteralPath .\capa-v5.0.0-windows.zip -DestinationPath .
