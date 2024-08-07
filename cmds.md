@@ -313,6 +313,9 @@ docker cp C:\Users\Administrator\Downloads\7z2201-extra.7z CONTAINERNAME:c:\tool
 
 ### TIP: Use the get_tools.ps vs running these commands manually
 
+### get_tools.ps https://raw.githubusercontent.com/compsecdirect/uctamas/main/Lab2/get_tools.ps
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/compsecdirect/uctamas/main/Lab2/get_tools.ps  -Method GET -UseBasicParsing -outfile c:\tools\get_tools.ps
+
 ### 7zr https://7-zip.org/a/7zr.exe
 Invoke-WebRequest -Uri https://7-zip.org/a/7zr.exe -Method GET -UseBasicParsing -outfile c:\tools\7zr.exe
 
