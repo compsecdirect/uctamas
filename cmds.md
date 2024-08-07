@@ -15,7 +15,7 @@ docker container ls -a
 
 ### Show me all volumes
 ```
-docker volume ls -a
+docker volume ls
 ```
 
 ### Show me all running containers
@@ -56,7 +56,7 @@ docker create
 docker exec
 ```
 
-## Lab exersize #1 ; Pull down samples
+## Lab exercise #1 ; Pull down samples
 
 - Task 1. Range check - Ensure you can login to the range.
 - Task 2. `malware-daily.py` usage  
@@ -255,7 +255,7 @@ docker exec -it yarGenNonroot whoami
 
 *** Bonus:
 
-`for x in $(ls samples); do basename $x | echo docker run -dit --rm -v tools:/tools -v samples:/samples -v results/results python:non-root python /tools/malware-daily.py -q $(echo $x | cut -d '.' -f1)  -o /results/  ; done`
+`time for x in $(ls samples); do basename $x | docker run -dit --rm -v tools:/tools -v samples:/samples -v results:/results python:non-root python /tools/malware-daily.py -q $(echo $x | cut -d '.' -f1)  -o "/results/"  ; done`
 
 # Workshop 2 - Containers on Windows
 *Container tools & commands*
