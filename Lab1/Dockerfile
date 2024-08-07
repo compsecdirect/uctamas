@@ -4,5 +4,5 @@ RUN pip3 install requests tdqm
 RUN addgroup -S user && adduser -S non-root -G user
 RUN mkdir /results /samples /tools
 COPY malware-daily.py /tools/
-RUN chown -R non-root:non-root /results /samples /tools
+RUN chown -R non-root:user /results /samples /tools
 USER non-root
