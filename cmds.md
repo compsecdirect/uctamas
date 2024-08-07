@@ -253,6 +253,9 @@ docker exec -it yarGenNonroot whoami
 
 **Now we have a limited user account that cannot benefit from root privileges inside container while still running tools**  
 
+*** Bonus:
+
+`for x in $(ls samples); do basename $x | echo docker run -dit --rm -v tools:/tools -v samples:/samples -v results/results python:non-root python /tools/malware-daily.py -q $(echo $x | cut -d '.' -f1)  -o /results/  ; done`
 
 # Workshop 2 - Containers on Windows
 *Container tools & commands*
