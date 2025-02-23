@@ -296,8 +296,9 @@ Running a container with run is ephemeral and non-permanent.
 docker run mcr.microsoft.com/windows/servercore:ltsc2022
 ```
 
-- Task 4: detach from running container  
-`Press Ctrl-P, followed by Ctrl-Q` **YMMV**
+- Task 4: detach from running container  (optional)  
+`Press Ctrl-P, followed by Ctrl-Q` **YMMV**  
+
 
 - Task 5: move new tools into container
 ```
@@ -311,9 +312,10 @@ docker cp C:\Users\Administrator\Downloads\7z2201-extra.7z CONTAINERNAME:c:\tool
 ```
 *Note: This Fails due to Administrator Path; how can we pull tools down if permissions are a problem?*
 
-### TIP: Use the get_tools.ps vs running these commands manually
+### TIP: Use the get_tools.ps vs running these commands manually  
 
-### get_tools.ps https://raw.githubusercontent.com/compsecdirect/uctamas/main/Lab2/get_tools.ps
+### get_tools.ps https://raw.githubusercontent.com/compsecdirect/uctamas/main/Lab2/get_tools.ps  
+
 Invoke-WebRequest -Uri https://raw.githubusercontent.com/compsecdirect/uctamas/main/Lab2/get_tools.ps  -Method GET -UseBasicParsing -outfile c:\tools\get_tools.ps
 
 ### 7zr https://7-zip.org/a/7zr.exe
@@ -353,7 +355,16 @@ docker commit 80a0a3b54672 REPO/servercore:11nov22
 docker save REPO/servercore:11nov22 -o 11nov22.tar
 ```
 
-- Task 11: "Expert" mounted  
+- Task 11: Get samples
+```
+docker volume create samples
+docker volume create results
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/compsecdirect/uctamas/main/malware-daily.py -Method GET -UseBasicParsing -outfile c:\tools\malware-daily.py
+A
+
+```
+
+- Task 12: "Expert" mounted  
 
 ```  
 docker run -dit --name python-non-admin -v scripts:c:\scripts -v samples:c:\samples -v workshop_tools:c:\tools -v output:c:\output -v python_311:c:\python\ uctamas:apr222023
