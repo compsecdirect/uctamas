@@ -68,7 +68,8 @@ docker exec
  ```  
 Note: This process can take up to 20 minutes; it really depends on how many samples malware-bazaar placed in the previous day's archive. 
 
-### Query Malware Bazaar for a given md5/sha1/sha256/ value
+### Query Malware Bazaar for a given md5/sha1/sha256/ value.
+#### As of 2025; you have to get an Auth-Key by registering into Malware Bazaar to query this way.  
 ```
 python3 malware-daily.py -q myHashValue
 ```
